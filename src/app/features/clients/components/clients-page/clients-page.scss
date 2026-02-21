@@ -1,0 +1,47 @@
+.page {
+  padding: 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.page__header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.page__icon {
+  font-size: 32px;
+  width: 32px;
+  height: 32px;
+  color: #6366f1;
+}
+
+.page__title {
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.page__layout {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.page__form-card {
+  position: sticky;
+  top: 24px;
+}
+
+@media (max-width: 900px) {
+  .page__layout {
+    grid-template-columns: 1fr;
+  }
+
+  .page__form-card {
+    position: static;
+  }
+}
