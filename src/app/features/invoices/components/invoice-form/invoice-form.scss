@@ -1,0 +1,34 @@
+.invoice-list {
+  &__spinner {
+    display: flex;
+    justify-content: center;
+    padding: 40px 0;
+  }
+
+  &__empty {
+    text-align: center;
+    color: #9e9e9e;
+    padding: 40px 0;
+  }
+
+  &__table {
+    width: 100%;
+  }
+}
+
+.status {
+  &--pendiente {
+    background-color: #fff3e0 !important;
+    color: #e65100 !important;
+  }
+
+  &--pagado {
+    background-color: #e8f5e9 !important;
+    color: #2e7d32 !important;
+  }
+
+  &--vencido {
+    background-color: #fce4ec !important;
+    color: #c62828 !important;
+  }
+}
