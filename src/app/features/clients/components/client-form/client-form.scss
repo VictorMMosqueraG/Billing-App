@@ -1,0 +1,32 @@
+.client-form {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-top: 8px;
+
+  &__field {
+    width: 100%;
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 8px;
+
+    button {
+      width: 100%;
+    }
+  }
+
+  &__success {
+    margin-top: 8px;
+    color: #2e7d32;
+    font-size: 14px;
+  }
+
+  &__error {
+    margin-top: 8px;
+    color: #c62828;
+    font-size: 14px;
+  }
+}
