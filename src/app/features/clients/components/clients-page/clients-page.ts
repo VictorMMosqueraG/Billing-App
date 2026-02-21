@@ -6,6 +6,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTableModule } from '@angular/material/table';
 import { ClientList } from '../client-list/client-list';
 import { ClientStore } from '../../store/client.store';
+import { ClientForm } from '../client-form/client-form';
 
 @Component({
   selector: 'app-clients-page',
@@ -15,6 +16,7 @@ import { ClientStore } from '../../store/client.store';
     MatPaginatorModule,
     MatProgressSpinnerModule,
     MatIconModule,
+    ClientForm,
     ClientList
   ],
   providers:[ClientStore],

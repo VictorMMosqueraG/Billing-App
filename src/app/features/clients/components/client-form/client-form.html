@@ -1,0 +1,52 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="client-form">
+
+  <mat-form-field appearance="outline" class="client-form__field">
+    <mat-label>Nombre</mat-label>
+    <input matInput formControlName="name" placeholder="Ej: Juan Pérez" />
+    @if (form.get('name')?.hasError('required') && form.get('name')?.touched) {
+      <mat-error>El nombre es requerido</mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="client-form__field">
+    <mat-label>Correo electrónico</mat-label>
+    <input matInput formControlName="email" placeholder="Ej: juan@correo.com" />
+    @if (form.get('email')?.hasError('required') && form.get('email')?.touched) {
+      <mat-error>El correo es requerido</mat-error>
+    }
+    @if (form.get('email')?.hasError('email') && form.get('email')?.touched) {
+      <mat-error>Ingresa un correo válido</mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="client-form__field">
+    <mat-label>Número de documento</mat-label>
+    <input matInput formControlName="document_number" placeholder="Ej: 1110283840" />
+    @if (form.get('document_number')?.hasError('required') && form.get('document_number')?.touched) {
+      <mat-error>El documento es requerido</mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="client-form__field">
+    <mat-label>Teléfono</mat-label>
+    <input matInput formControlName="phone" placeholder="Ej: 3207775152" />
+    @if (form.get('phone')?.hasError('required') && form.get('phone')?.touched) {
+      <mat-error>El teléfono es requerido</mat-error>
+    }
+  </mat-form-field>
+
+  <div class="client-form__actions">
+    @if (store.saving()) {
+      <mat-spinner diameter="36" />
+    } @else {
+      <button mat-flat-button color="primary" type="submit">
+        Crear cliente
+      </button>
+    }
+  </div>
+
+  @if (store.error()) {
+    <p class="client-form__error"> {{ store.error() }}</p>
+  }
+
+</form>
