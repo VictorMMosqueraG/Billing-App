@@ -1,0 +1,40 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      <mat-icon>people</mat-icon>
+      Resumen por Cliente
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    @if (byClient().length === 0) {
+      <p class="invoices-by-client__empty">Sin datos disponibles</p>
+    } @else {
+      <table mat-table [dataSource]="byClient()" class="invoices-by-client__table">
+
+        <ng-container matColumnDef="client_id">
+          <th mat-header-cell *matHeaderCellDef>ID Cliente</th>
+          <td mat-cell *matCellDef="let row">
+            <code>{{ row.client_id }}</code>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="invoice_count">
+          <th mat-header-cell *matHeaderCellDef>Facturas</th>
+          <td mat-cell *matCellDef="let row">
+            <mat-chip>{{ row.invoice_count }}</mat-chip>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="total_amount">
+          <th mat-header-cell *matHeaderCellDef>Total</th>
+          <td mat-cell *matCellDef="let row">
+            {{ row.total_amount | currency:'COP':'symbol':'1.0-0' }}
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    }
+  </mat-card-content>
+</mat-card>

@@ -2,7 +2,7 @@ import { HttpInterceptorFn, HttpErrorResponse } from '@angular/common/http';
 import { inject }                               from '@angular/core';
 import { Router }                               from '@angular/router';
 import { catchError, throwError }               from 'rxjs';
-import { ErrorMessages } from '../../shared/Messages/error.messages';
+import { Messages } from '../../shared/Messages/messages';
 
 export const errorInterceptor: HttpInterceptorFn = (req, next) => {
   const router = inject(Router);
@@ -18,7 +18,7 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
 
   return next(reqWithHeaders).pipe(
     catchError((error: HttpErrorResponse) => {
-      const message = error.error?.detail ?? error.error?.message ?? ErrorMessages.NOT_FOUND;
+      const message = error.error?.detail ?? error.error?.message ?? Messages.NOT_FOUND;
       if (error.status === 404) router.navigate(['/not-found']);
       return throwError(() => ({ status: error.status, message }));
     })

@@ -1,0 +1,42 @@
+@if (summary()) {
+  <div class="summary-cards">
+    <mat-card class="summary-card summary-card--total">
+      <mat-card-content>
+        <div class="summary-card__icon-wrap">
+          <mat-icon>receipt_long</mat-icon>
+        </div>
+        <div class="summary-card__info">
+          <span class="summary-card__label">Total Facturas</span>
+          <span class="summary-card__value">{{ summary()!.total }}</span>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="summary-card summary-card--amount">
+      <mat-card-content>
+        <div class="summary-card__icon-wrap">
+          <mat-icon>attach_money</mat-icon>
+        </div>
+        <div class="summary-card__info">
+          <span class="summary-card__label">Monto Total</span>
+          <span class="summary-card__value">{{ summary()!.total_amount | currency:'COP':'symbol':'1.0-0' }}</span>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    @for (group of summary()!.by_status; track group.status) {
+      <mat-card class="summary-card" [class]="'summary-card--' + group.status">
+        <mat-card-content>
+          <div class="summary-card__icon-wrap">
+            <mat-icon>label</mat-icon>
+          </div>
+          <div class="summary-card__info">
+            <span class="summary-card__label">{{ group.status | titlecase }}</span>
+            <span class="summary-card__value">{{ group.count }}</span>
+            <span class="summary-card__sub">{{ group.total_amount | currency:'COP':'symbol':'1.0-0' }}</span>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    }
+  </div>
+}

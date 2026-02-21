@@ -1,0 +1,82 @@
+<div class="dashboard">
+  <div class="dashboard__header">
+    <mat-icon class="dashboard__icon">dashboard</mat-icon>
+    <div>
+      <h1 class="dashboard__title">Dashboard de Facturación</h1>
+      <p class="dashboard__subtitle">Resumen general y gestión de recordatorios</p>
+    </div>
+  </div>
+
+  @if (store.loadingSummary()) {
+    <div class="dashboard__loading">
+      <mat-spinner diameter="48" />
+      <p>Cargando resumen...</p>
+    </div>
+  } @else {
+    <app-summary-cards [summary]="store.summary()" />
+
+    <!-- Panel de recordatorios -->
+    <mat-card class="dashboard__reminders">
+      <mat-card-header>
+        <mat-card-title>
+          <mat-icon>notifications_active</mat-icon>
+          Procesamiento de Recordatorios
+        </mat-card-title>
+        <mat-card-subtitle>
+          Envía emails automáticamente y actualiza el estado de las facturas
+        </mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content class="dashboard__reminders-flow">
+        <div class="dashboard__step">
+          <mat-icon class="dashboard__step-icon dashboard__step-icon--warning">schedule</mat-icon>
+          <div>
+            <strong>1er Recordatorio</strong>
+            <p>Envía email → pasa a <b>2do Recordatorio</b></p>
+          </div>
+        </div>
+        <mat-icon>arrow_forward</mat-icon>
+        <div class="dashboard__step">
+          <mat-icon class="dashboard__step-icon dashboard__step-icon--danger">warning</mat-icon>
+          <div>
+            <strong>2do Recordatorio</strong>
+            <p>Envía email → pasa a <b>Desactivado</b></p>
+          </div>
+        </div>
+      </mat-card-content>
+
+      @if (store.remindersResult()) {
+        <mat-card-content class="dashboard__reminders-result">
+          <div class="dashboard__result-item">
+            <span>Total procesadas</span>
+            <strong>{{ store.remindersResult()!.total_processed }}</strong>
+          </div>
+          <div class="dashboard__result-item dashboard__result-item--warning">
+            <span>→ 2do Recordatorio</span>
+            <strong>{{ store.remindersResult()!.upgraded_to_second_reminder }}</strong>
+          </div>
+          <div class="dashboard__result-item dashboard__result-item--danger">
+            <span>→ Desactivadas</span>
+            <strong>{{ store.remindersResult()!.upgraded_to_disabled }}</strong>
+          </div>
+        </mat-card-content>
+      }
+
+      <mat-card-actions>
+        @if (store.processingReminders()) {
+          <mat-spinner diameter="32" />
+          <span>Procesando y enviando emails...</span>
+        } @else {
+          <button mat-flat-button color="accent" (click)="onProcessReminders()">
+            <mat-icon>send</mat-icon>
+            Procesar Recordatorios
+          </button>
+        }
+      </mat-card-actions>
+    </mat-card>
+
+    @if (store.error()) {
+      <p class="dashboard__error"> {{ store.error() }}</p>
+    }
+  }
+</div>
