@@ -1,0 +1,26 @@
+<div class="page">
+  <div class="page__header">
+    <mat-icon class="page__icon">receipt_long</mat-icon>
+    <h1 class="page__title">Facturas</h1>
+  </div>
+
+  <div class="page__layout">
+    <mat-card class="page__form-card">
+      <mat-card-header>
+        <mat-card-title>Nueva factura</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <app-invoice-form [clients]="clientStore.clients()" />
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="page__list-card">
+      <mat-card-header>
+        <mat-card-title>Listado</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <!-- <app-invoice-list /> -->
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
