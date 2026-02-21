@@ -2,7 +2,7 @@ import { HttpInterceptorFn, HttpErrorResponse } from '@angular/common/http';
 import { inject }                               from '@angular/core';
 import { Router }                               from '@angular/router';
 import { catchError, throwError }               from 'rxjs';
-import { ErrorMessages } from '../Messages/error.messages';
+import { ErrorMessages } from '../../shared/Messages/error.messages';
 
 export const errorInterceptor: HttpInterceptorFn = (req, next) => {
   const router = inject(Router);

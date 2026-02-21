@@ -5,12 +5,12 @@ import { environment } from '../../../environments/environment';
 import { ApiResponse } from '../../../core/models/response/api.response';
 import { PaginationParams } from '../../../core/models/response/pagination.params';
 import { PaginatedResponse } from '../../../core/models/response/pagination.response';
-import { CreateInvoiceRequest, Invoice } from '../../../core';
+import { ApiUrl, CreateInvoiceRequest, Invoice } from '../../../core';
 
 @Injectable({ providedIn: 'root' })
 export class InvoiceService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = `${environment.apiUrl}/invoices`;
+  private readonly baseUrl = `${environment.apiUrl}/${ApiUrl.Invoice}`;
 
 
   getAll(params: PaginationParams): Observable<PaginatedResponse<Invoice[]>> {

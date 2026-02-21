@@ -4,10 +4,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { InvoiceForm } from '../invoice-form/invoice-form';
 import { InvoiceStore } from '../../store/invoice.store';
 import { ClientStore } from '../../../clients/store/client.store';
+import { InvoiceList } from '../invoice-list/invoice-list';
 
 @Component({
   selector: 'app-invoice-page',
-  imports: [MatCardModule, MatIconModule, InvoiceForm],
+  imports: [MatCardModule, MatIconModule, InvoiceForm,InvoiceList],
   providers: [InvoiceStore, ClientStore],
   templateUrl: './invoice-page.html',
   styleUrl: './invoice-page.scss',
