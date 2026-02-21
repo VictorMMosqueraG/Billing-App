@@ -69,6 +69,32 @@ export const InvoiceStore = signalStore(
       )
     ),
 
+    updateStatus: rxMethod<{ id: string; status: string }>(
+      pipe(
+        tap(() => patchState(store, { saving: true, error: null })),
+        switchMap(({ id, status }) =>
+          service.updateStatus(id, status).pipe(
+            tap(() =>
+              patchState(store, {
+                invoices: store.invoices().map(inv =>
+                  inv.id === id ? { ...inv, status } : inv
+                ),
+                saving: false,
+                saved: true,
+              })
+            ),
+            catchError((err: { message: string }) => {
+              patchState(store, { error: err.message, saving: false });
+              return EMPTY;
+            })
+          )
+        )
+      )
+    ),
+
+
     resetSaved: () => patchState(store, { saved: false, error: null })
   }))
+
+
 );

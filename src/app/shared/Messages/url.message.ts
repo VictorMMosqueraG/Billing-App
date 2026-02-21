@@ -4,4 +4,5 @@ export class ApiUrl {
   static readonly Summary = 'Summary';
   static readonly Billing = 'billing';
   static readonly ProcessReminders = 'process-reminders';
+  static readonly Status = 'status';
 }

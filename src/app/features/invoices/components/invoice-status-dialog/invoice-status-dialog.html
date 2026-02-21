@@ -1,0 +1,21 @@
+<h2 mat-dialog-title>Actualizar Estado</h2>
+
+<mat-dialog-content>
+  <p>Factura: <strong>{{ data.invoice.invoice_number }}</strong></p>
+
+  <form [formGroup]="form">
+    <mat-form-field appearance="outline" style="width: 100%">
+      <mat-label>Nuevo Estado</mat-label>
+      <mat-select formControlName="new_status">
+        @for (status of statuses; track status) {
+          <mat-option [value]="status">{{ status }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="cancel()">Cancelar</button>
+  <button mat-flat-button color="primary" (click)="confirm()">Guardar</button>
+</mat-dialog-actions>

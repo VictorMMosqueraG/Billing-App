@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { ApiResponse } from '../../../core/models/response/api.response';
 import { PaginationParams } from '../../../core/models/response/pagination.params';
@@ -25,4 +25,13 @@ export class InvoiceService {
   create(body: CreateInvoiceRequest): Observable<ApiResponse<Invoice>> {
     return this.http.post<ApiResponse<Invoice>>(this.baseUrl, body);
   }
+
+  updateStatus(idInvoice: string, newStatus: string): Observable<boolean> {
+  return this.http
+    .patch<{ results: boolean; message: string }>(
+      `${this.baseUrl}/${idInvoice}/${ApiUrl.Status}`,
+      { new_status: newStatus }
+    )
+    .pipe(map(r => r.results));
+}
 }
